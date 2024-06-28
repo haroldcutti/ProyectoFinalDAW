@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Crear Marca</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nombre de la Marca</label>
+        <input type="text" class="form-control" [(ngModel)]="marca.name" name="name" required>
+      </div>
+      <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+  </div>
+  

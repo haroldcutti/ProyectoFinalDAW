@@ -1,0 +1,26 @@
+<div class="container">
+  <h2 class="mt-4 mb-3">Tienda de Productos</h2>
+  
+  <!-- Filtro de Marca -->
+  <div class="mb-3">
+    <label for="brandFilter" class="form-label">Filtrar por Marca:</label>
+    <select id="brandFilter" class="form-select" [(ngModel)]="brandFilter">
+      <option value="">Todas las Marcas</option>
+      <option *ngFor="let marca of marcas" [value]="marca.name">{{ marca.name }}</option>
+    </select>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4" *ngFor="let producto of filterByBrand()">
+      <div class="card mb-3">
+        <img *ngIf="producto.image" [src]="producto.image" class="card-img-top img-fluid" alt="{{ producto.model }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ producto.model }}</h5>
+          <p class="card-text">Marca: {{ getBrandName(producto.brand) }}</p>
+          <p class="card-text">Precio: {{ producto.price | number:'1.2-2' }}</p>
+          <p class="card-text">Año: {{ producto.year }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>Listar Marcas</h2>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let marca of marcas">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          {{ marca.name }}
+        </div>
+        <div>
+          <!-- Botones de editar y eliminar -->
+          <button class="btn btn-sm btn-primary" (click)="editarMarca(marca, editarMarcaModal)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="eliminarMarca(marca.id)">Eliminar</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Modal de Edición con NgBootstrap -->
+<ng-template #editarMarcaModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Editar Marca</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (submit)="guardarCambios()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="marcaEditada.name">
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+  </div>
+</ng-template>

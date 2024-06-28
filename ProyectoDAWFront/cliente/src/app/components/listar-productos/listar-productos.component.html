@@ -1,0 +1,59 @@
+<div class="container">
+  <h2>Lista de Productos</h2>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let producto of productos">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <img *ngIf="producto.image" [src]="producto.image" alt="{{ producto.model }}" width="100">
+          <strong>{{ producto.model }}</strong> - Marca: {{ getBrandName(producto.brand) }}
+        </div>
+        <div>
+          Precio: {{ producto.price }} - Año: {{ producto.year }}
+        </div>
+        <div>
+          <!-- Botones de editar y eliminar -->
+          <button class="btn btn-sm btn-primary" (click)="editarProducto(producto, editarProductoModal)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="eliminarProducto(producto.id)">Eliminar</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Modal de Edición con NgBootstrap -->
+<ng-template #editarProductoModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Editar Producto</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (submit)="guardarCambios()">
+      <div class="form-group">
+        <label for="modelo">Modelo</label>
+        <input type="text" class="form-control" id="modelo" name="modelo" [(ngModel)]="productoEditado.model">
+      </div>
+      <div class="form-group">
+        <label for="marca">Marca</label>
+        <select class="form-control" id="marca" name="marca" [(ngModel)]="productoEditado.brand">
+          <option *ngFor="let marca of marcas" [value]="marca.id">{{ marca.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="precio">Precio</label>
+        <input type="number" class="form-control" id="precio" name="precio" [(ngModel)]="productoEditado.price">
+      </div>
+      <div class="form-group">
+        <label for="anio">Año</label>
+        <input type="number" class="form-control" id="anio" name="anio" [(ngModel)]="productoEditado.year">
+      </div>
+      <div class="form-group">
+        <label for="imagen">Imagen</label>
+        <input type="file" class="form-control-file" id="imagen" (change)="onImageSelected($event)">
+        <img *ngIf="productoEditado.image" [src]="productoEditado.image" alt="Imagen actual" width="100">
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Crear Producto</h2>
+  <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+    <div class="form-group">
+      <label for="brand">Marca</label>
+      <select id="brand" class="form-control" [(ngModel)]="producto.brand" name="brand" required>
+        <option *ngFor="let marca of marcas" [ngValue]="marca.id">{{ marca.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="model">Modelo</label>
+      <input type="text" id="model" class="form-control" [(ngModel)]="producto.model" name="model" required>
+    </div>
+    <div class="form-group">
+      <label for="image">Imagen</label>
+      <input type="file" id="image" (change)="onImageSelected($event)" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="price">Precio</label>
+      <input type="number" id="price" class="form-control" [(ngModel)]="producto.price" name="price" required>
+    </div>
+    <div class="form-group">
+      <label for="year">Año</label>
+      <input type="number" id="year" class="form-control" [(ngModel)]="producto.year" name="year" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Producto</button>
+  </form>
+  <div *ngIf="mensajeError" class="error">
+    {{ mensajeError }}
+  </div>
+</div>
